@@ -39,17 +39,16 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             HostelManagmentTheme {
-                MainScreen(::checkAndNavigation)
+                MainScreen(::checkLoginStatusAndGo)
             }
         }
     }
 
-    private fun checkAndNavigation(value: Int) {
+    private fun checkLoginStatusAndGo(value: Int) {
 
         when (value) {
             1 -> {
-//                startActivity(Intent(this, HomeActivity::class.java))
-//                finish()
+                //TODO Add Home Screen
             }
 
             2 -> {
@@ -105,13 +104,24 @@ fun SplashScreen() {
 
             Image(
                 painter = painterResource(id = R.drawable.hostel_icon),
-                contentDescription = "Hostel Management",
+                contentDescription = "Book Hostel through Venkat App",
             )
 
             Spacer(modifier = Modifier.weight(1f))
 
             Text(
-                text = "Hostel Management",
+                text = "Book Hostel through",
+                color = colorResource(id = R.color.p2),
+                fontSize = 36.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(bottom = 6.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
+
+            Text(
+                text = "Venkat App",
                 color = colorResource(id = R.color.p2),
                 fontSize = 36.sp,
                 fontWeight = FontWeight.Bold,
@@ -121,15 +131,15 @@ fun SplashScreen() {
                     .align(Alignment.CenterHorizontally)
             )
 
+
         }
     }
 
 }
 
 
-
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun MainActivityPreview() {
     SplashScreen()
 }

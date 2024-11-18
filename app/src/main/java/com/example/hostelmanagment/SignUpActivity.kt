@@ -1,5 +1,6 @@
 package com.example.hostelmanagment
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -53,8 +54,8 @@ fun RegisterScreen() {
     var userpassword by remember { mutableStateOf("") }
     var confirmuserpassword by remember { mutableStateOf("") }
 
-//    val context = LocalContext.current as Activity
-    val context = LocalContext.current
+    val context = LocalContext.current as Activity
+//    val context = LocalContext.current
 
 
     Column(
@@ -62,7 +63,7 @@ fun RegisterScreen() {
             .fillMaxSize()
             .background(color = colorResource(id = R.color.p1)),
 
-    ) {
+        ) {
 
         Column(
             modifier = Modifier.padding(16.dp),
@@ -155,7 +156,10 @@ fun RegisterScreen() {
                 modifier = Modifier
                     .padding(16.dp, 2.dp),
                 shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.p2), contentColor = colorResource(id = R.color.p1))
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(id = R.color.p2),
+                    contentColor = colorResource(id = R.color.p1)
+                )
             ) {
                 Text("SignUp")
             }
@@ -172,7 +176,7 @@ fun RegisterScreen() {
                     text = "Already have an account? ",
                     style = MaterialTheme.typography.bodyLarge,
                     color = colorResource(id = R.color.p2),
-                    )
+                )
 
                 Text(
                     text = "SignIn",
@@ -180,7 +184,7 @@ fun RegisterScreen() {
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Black),
                     modifier = Modifier.clickable {
                         context.startActivity(Intent(context, SignUpActivity::class.java))
-//                    context.finish() TODO UC
+                        context.finish()
                     }
                 )
             }

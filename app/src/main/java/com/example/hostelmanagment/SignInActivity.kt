@@ -1,5 +1,6 @@
 package com.example.hostelmanagment
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -34,6 +35,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.hostelmanagment.activities.MainDashboardActivity
 import com.google.firebase.database.FirebaseDatabase
 
 
@@ -55,8 +57,8 @@ fun LoginScreen() {
     var useremail by remember { mutableStateOf("") }
     var userpassword by remember { mutableStateOf("") }
 
-//    val context = LocalContext.current as Activity
-    val context = LocalContext.current
+    val context = LocalContext.current as Activity
+//    val context = LocalContext.current
 
 
     Column(
@@ -66,7 +68,7 @@ fun LoginScreen() {
     ) {
 
         Column(
-            modifier = Modifier .padding(16.dp),
+            modifier = Modifier.padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -107,7 +109,8 @@ fun LoginScreen() {
             Button(
                 onClick = {
                     if (useremail.isNotEmpty() && userpassword.isNotEmpty()) {
-                        Toast.makeText(context, "To be Implemented", Toast.LENGTH_SHORT).show()
+                        context.startActivity(Intent(context, MainDashboardActivity::class.java))
+                        context.finish()
                     } else {
                         Toast.makeText(context, "Please fill all fields", Toast.LENGTH_SHORT).show()
                     }
@@ -115,7 +118,10 @@ fun LoginScreen() {
                 modifier = Modifier
                     .padding(16.dp, 2.dp),
                 shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = colorResource(id = R.color.p2), contentColor = colorResource(id = R.color.p1))
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(id = R.color.p2),
+                    contentColor = colorResource(id = R.color.p1)
+                )
             ) {
                 Text("SignIn")
             }
@@ -140,7 +146,7 @@ fun LoginScreen() {
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Black),
                     modifier = Modifier.clickable {
                         context.startActivity(Intent(context, SignUpActivity::class.java))
-//                    context.finish() TODO-UC
+                        context.finish()
                     }
                 )
 
