@@ -1,5 +1,6 @@
 package com.example.hostelmanagment.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -48,7 +49,7 @@ class MainDashboardActivity : ComponentActivity() {
 
 
     private fun openHostelDetails(hostelData: HostelData) {
-
+        startActivity(Intent(this, HostelDetailsActivity::class.java))
     }
 
 }

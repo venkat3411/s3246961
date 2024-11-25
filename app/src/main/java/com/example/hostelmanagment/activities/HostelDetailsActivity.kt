@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.hostelmanagment.R
@@ -35,6 +36,14 @@ class HostelDetailsActivity : AppCompatActivity() {
         }
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun HDetailsPreview()
+{
+    HDetails()
+}
+
 @Composable
 fun HDetails() {
 
@@ -60,7 +69,7 @@ fun HDetails() {
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.hostel_rooms),
-                    contentDescription = "AI Doctor",
+                    contentDescription = "Hostel Management",
                     Modifier
                         .width(150.dp)
                         .height(150.dp)
