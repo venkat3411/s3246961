@@ -1,4 +1,4 @@
-package com.example.hostelmanagment.activities
+package com.venkatS3246961.hostelmanagment.activities
 
 data class HostelData(
     val hostelname: String = "",

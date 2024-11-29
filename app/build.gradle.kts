@@ -1,15 +1,15 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-//    id("com.google.gms.google-services")
+    id("com.google.gms.google-services")
 }
 
 android {
-    namespace = "com.example.hostelmanagment"
+    namespace = "com.venkatS3246961.hostelmanagment"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.hostelmanagment"
+        applicationId = "com.venkatS3246961.hostelmanagment"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

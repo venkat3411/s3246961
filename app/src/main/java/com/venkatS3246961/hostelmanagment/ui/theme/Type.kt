@@ -1,4 +1,4 @@
-package com.example.hostelmanagment.ui.theme
+package com.venkatS3246961.hostelmanagment.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "434446173606",
+    "firebase_url": "https://hostelmanagement-65564-default-rtdb.firebaseio.com",
+    "project_id": "hostelmanagement-65564",
+    "storage_bucket": "hostelmanagement-65564.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:434446173606:android:af93f7e8cfad0f1ebebb67",
+        "android_client_info": {
+          "package_name": "com.venkatS3246961.hostelmanagment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH-BmyFdYbiTanSzDRmaJBujf_pOlwkFs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

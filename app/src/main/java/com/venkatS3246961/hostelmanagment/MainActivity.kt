@@ -1,5 +1,6 @@
-package com.example.hostelmanagment
+package com.venkatS3246961.hostelmanagment
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -29,7 +30,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.hostelmanagment.ui.theme.HostelManagmentTheme
+import com.venkatS3246961.hostelmanagment.activities.MainDashboardActivity
+import com.venkatS3246961.hostelmanagment.ui.theme.HostelManagmentTheme
 import kotlinx.coroutines.delay
 
 
@@ -39,52 +41,42 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             HostelManagmentTheme {
-                MainScreen(::checkLoginStatusAndGo)
+                MainScreen(onLoginClick = { value ->})
             }
-        }
+            }
     }
 
-    private fun checkLoginStatusAndGo(value: Int) {
 
-        when (value) {
-            1 -> {
-                //TODO Add Home Screen
-            }
-
-            2 -> {
-                startActivity(Intent(this, SignInActivity::class.java))
-                finish()
-            }
-
-            3 -> {
-                startActivity(Intent(this, SignUpActivity::class.java))
-                finish()
-            }
-        }
-    }
 }
 
 @Composable
 fun MainScreen(onLoginClick: (value: Int) -> Unit) {
     var showSplash by remember { mutableStateOf(true) }
 
-    val context = LocalContext.current
+    val context = LocalContext.current as Activity
 
     LaunchedEffect(Unit) {
         delay(3000) // 3 seconds delay
         showSplash = false
     }
-
     if (showSplash) {
         SplashScreen()
     } else {
-        if (ResidentDetails.getResidentLoginStatus(context)) {
-            onLoginClick.invoke(1)
-        } else {
-            onLoginClick.invoke(2)
+        val ResidentStatus = ResidentDetails.getResidentLoginStatus(context)
+
+        if (ResidentStatus) {
+            context.startActivity(Intent(context, MainDashboardActivity::class.java))
+            context.finish()
+        }
+        else {
+            context.startActivity(Intent(context, SignInActivity::class.java))
+            context.finish()
         }
     }
 }
+
+
+
 
 @Composable
 fun SplashScreen() {

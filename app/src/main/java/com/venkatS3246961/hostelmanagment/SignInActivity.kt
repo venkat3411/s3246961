@@ -1,4 +1,4 @@
-package com.example.hostelmanagment
+package com.venkatS3246961.hostelmanagment
 
 import android.app.Activity
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -33,55 +34,52 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.hostelmanagment.ui.theme.HostelManagmentTheme
+import com.google.firebase.database.FirebaseDatabase
+import com.venkatS3246961.hostelmanagment.activities.MainDashboardActivity
 
-class SignUpActivity : ComponentActivity() {
+
+class SignInActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
 
         setContent {
-            HostelManagmentTheme {
-                RegisterScreen()
-            }
+            LoginScreen()
         }
     }
 }
 
+
 @Composable
-fun RegisterScreen() {
-    var name by remember { mutableStateOf("") }
+fun LoginScreen() {
     var useremail by remember { mutableStateOf("") }
     var userpassword by remember { mutableStateOf("") }
-    var confirmuserpassword by remember { mutableStateOf("") }
 
     val context = LocalContext.current as Activity
-//    val context = LocalContext.current
-
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(color = colorResource(id = R.color.p1)),
-
-        ) {
+    ) {
 
         Column(
             modifier = Modifier.padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-
             Spacer(modifier = Modifier.weight(1f))
 
             Text(
-                text = "Welcome to our App!",
+                text = "Welcome back!",
                 color = colorResource(id = R.color.p2),
                 style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
                 modifier = Modifier.padding(bottom = 4.dp)
             )
 
             Text(
-                text = "Please fill your details",
+                text = "Please enter your details",
                 color = colorResource(id = R.color.p2),
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(bottom = 32.dp)
@@ -91,67 +89,37 @@ fun RegisterScreen() {
                 modifier = Modifier.fillMaxWidth(),
                 value = useremail,
                 onValueChange = { useremail = it },
-                label = { Text("Enter Mail") },
-
-                )
-
-            Spacer(modifier = Modifier.height(6.dp))
-
-            TextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = name,
-                onValueChange = { name = it },
-                label = { Text("Enter Name") }
+                label = { Text("Enter E-Mail") },
             )
 
-            Spacer(modifier = Modifier.height(6.dp))
-
+            Spacer(modifier = Modifier.height(4.dp))
 
             TextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = userpassword,
                 onValueChange = { userpassword = it },
-                label = { Text("Enter Password") }
-            )
-
-
-            Spacer(modifier = Modifier.height(6.dp))
-
-            TextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = confirmuserpassword,
-                onValueChange = { confirmuserpassword = it },
-                label = { Text("Confirm Password") }
+                label = { Text("Enter Password") },
             )
 
             Spacer(modifier = Modifier.height(36.dp))
 
             Button(
                 onClick = {
+                    when {
+                        useremail.isEmpty() -> {
+                            Toast.makeText(context, " Please Enter Mail", Toast.LENGTH_SHORT).show()
+                        }
 
-                    if (name.isEmpty()) {
-                        Toast.makeText(context, "Enter name", Toast.LENGTH_SHORT).show()
-                        return@Button
+                        userpassword.isEmpty() -> {
+                            Toast.makeText(context, " Please Enter Password", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+
+                        else -> {
+                            signInGuest(useremail, userpassword, context)
+                        }
+
                     }
-
-                    if (useremail.isEmpty()) {
-                        Toast.makeText(context, "Enter Mail", Toast.LENGTH_SHORT).show()
-                        return@Button
-                    }
-
-                    if (userpassword.isEmpty()) {
-                        Toast.makeText(context, "Enter Password", Toast.LENGTH_SHORT).show()
-                        return@Button
-                    }
-
-                    if (userpassword != confirmuserpassword) {
-                        Toast.makeText(context, "Passwords doesn't match", Toast.LENGTH_SHORT)
-                            .show()
-                        return@Button
-                    }
-
-                    Toast.makeText(context, "TODO", Toast.LENGTH_SHORT).show()
-
                 },
                 modifier = Modifier
                     .padding(16.dp, 2.dp),
@@ -161,25 +129,25 @@ fun RegisterScreen() {
                     contentColor = colorResource(id = R.color.p1)
                 )
             ) {
-                Text("SignUp")
+                Text("SignIn")
             }
+
 
             Spacer(modifier = Modifier.height(12.dp))
 
             Spacer(modifier = Modifier.weight(1f))
 
-
             Row(
                 modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
             ) {
                 Text(
-                    text = "Already have an account? ",
-                    style = MaterialTheme.typography.bodyLarge,
+                    text = "Don't have an account? ",
                     color = colorResource(id = R.color.p2),
+                    style = MaterialTheme.typography.bodyLarge,
                 )
 
                 Text(
-                    text = "SignIn",
+                    text = "SignUp",
                     color = colorResource(id = R.color.p2),
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Black),
                     modifier = Modifier.clickable {
@@ -187,15 +155,58 @@ fun RegisterScreen() {
                         context.finish()
                     }
                 )
+
             }
 
-        }
 
+        }
+    }
+
+}
+
+private fun signInGuest(useremail: String, userpassword: String, context: Activity) {
+    val db = FirebaseDatabase.getInstance()
+    val sanitizedUid = useremail.replace(".", ",")
+    val ref = db.getReference("Users").child(sanitizedUid)
+
+    ref.get().addOnCompleteListener { task ->
+        if (task.isSuccessful) {
+            val userData = task.result?.getValue(ResidentData::class.java)
+            checkAndGO(useremail, userpassword, context, userData)
+        } else {
+            Toast.makeText(
+                context,
+                "Failed to retrieve user data: ${task.exception?.message}",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }
 
+fun checkAndGO(
+    useremail: String,
+    userpassword: String,
+    context: Activity,
+    userData: ResidentData?
+) {
+    if (userData != null) {
+        if (userData.userpassword == userpassword) {
+            Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
+            ResidentDetails.saveResidentLoginStatus(context, true)
+            ResidentDetails.saveResidentEmail(context, useremail)
+            context.startActivity(Intent(context, MainDashboardActivity::class.java))
+            context.finish()
+        } else {
+            Toast.makeText(context, "Invalid Password", Toast.LENGTH_SHORT).show()
+        }
+    } else {
+        Toast.makeText(context, "No user data found", Toast.LENGTH_SHORT).show()
+    }
+}
+
+
 @Preview(showBackground = true)
 @Composable
-fun RegisterScreenPreview() {
-    RegisterScreen()
+fun LoginScreenPreview() {
+    LoginScreen()
 }

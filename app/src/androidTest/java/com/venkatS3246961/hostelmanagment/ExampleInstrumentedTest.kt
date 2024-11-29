@@ -1,4 +1,4 @@
-package com.example.hostelmanagment
+package com.venkatS3246961.hostelmanagment
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

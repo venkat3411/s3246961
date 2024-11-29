@@ -1,5 +1,6 @@
-package com.example.hostelmanagment.activities
+package com.venkatS3246961.hostelmanagment.activities
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -20,6 +21,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,21 +36,27 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.hostelmanagment.R
-import com.example.hostelmanagment.ui.theme.HostelManagmentTheme
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.venkatS3246961.hostelmanagment.R
+import com.venkatS3246961.hostelmanagment.ResidentDetails
+import com.venkatS3246961.hostelmanagment.SignInActivity
+import com.venkatS3246961.hostelmanagment.ui.theme.HostelManagmentTheme
 
 class MainDashboardActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             HostelManagmentTheme {
-                HostelSelection(::openHostelDetails)
+                HostelSelection(::gotoHostelDetails, ::onProfileClicked)
             }
         }
     }
+    private fun onProfileClicked() {
+    }
 
 
-    private fun openHostelDetails(hostelData: HostelData) {
+    private fun gotoHostelDetails(hostel: HostelData) {
+        SelectHostel.hostel=hostel
         startActivity(Intent(this, HostelDetailsActivity::class.java))
     }
 
@@ -58,12 +66,13 @@ class MainDashboardActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun HostelPreview() {
-    HostelSelection(onHostelSelected = {})
+    HostelSelection(onHostelSelected = {}, onProfileClicked = {})
 }
 
 @Composable
-fun HostelSelection(onHostelSelected: (hostelData: HostelData) -> Unit) {
+fun HostelSelection(onHostelSelected: (hostelData: HostelData) -> Unit,onProfileClicked: () -> Unit) {
     val hostels = getHostelData()
+    val context = LocalContext.current as Activity
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -75,6 +84,8 @@ fun HostelSelection(onHostelSelected: (hostelData: HostelData) -> Unit) {
                 .fillMaxWidth()
                 .background(color = colorResource(id = R.color.p1))
                 .padding(vertical = 6.dp, horizontal = 16.dp),
+             // Space between elements in the row
+
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
@@ -93,6 +104,21 @@ fun HostelSelection(onHostelSelected: (hostelData: HostelData) -> Unit) {
                 style = MaterialTheme.typography.titleLarge,
                 color = colorResource(id = R.color.p2),
                 fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.weight(1f))
+
+            Image(painter = painterResource(id = R.drawable.baseline_logout_24),
+                contentDescription = "Logout",
+                modifier = Modifier
+                    .clickable {
+                        // Navigate to LoginActivity when clicked
+                        ResidentDetails.saveResidentLoginStatus(context, false)
+
+                        val intent = Intent(context, SignInActivity::class.java)
+                        context.startActivity(intent)
+                         context.finish()
+                    }
+                    .padding(start = 8.dp) // Optional spacing // Optional spacin
             )
         }
 
