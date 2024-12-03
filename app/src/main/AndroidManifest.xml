@@ -13,14 +13,14 @@
         android:theme="@style/Theme.HostelManagment"
         tools:targetApi="31">
         <activity
+            android:name=".activities.PracticeActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.MainDashboardActivity"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".activities.HostelDetailsActivity"
             android:exported="false" />
-
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
@@ -37,7 +37,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 
