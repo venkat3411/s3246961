@@ -36,6 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.firebase.database.FirebaseDatabase
 import com.venkatS3246961.hostelmanagment.activities.MainDashboardActivity
+import com.venkatS3246961.hostelmanagment.activities.MainHomeActivity
 
 
 class SignInActivity : ComponentActivity() {
@@ -194,7 +195,7 @@ fun checkAndGO(
             Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
             ResidentDetails.saveResidentLoginStatus(context, true)
             ResidentDetails.saveResidentEmail(context, useremail)
-            context.startActivity(Intent(context, MainDashboardActivity::class.java))
+            context.startActivity(Intent(context, MainHomeActivity::class.java))
             context.finish()
         } else {
             Toast.makeText(context, "Invalid Password", Toast.LENGTH_SHORT).show()

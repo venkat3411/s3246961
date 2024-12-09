@@ -31,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.venkatS3246961.hostelmanagment.activities.MainDashboardActivity
+import com.venkatS3246961.hostelmanagment.activities.MainHomeActivity
 import com.venkatS3246961.hostelmanagment.ui.theme.HostelManagmentTheme
 import kotlinx.coroutines.delay
 
@@ -65,7 +66,7 @@ fun MainScreen(onLoginClick: (value: Int) -> Unit) {
         val ResidentStatus = ResidentDetails.getResidentLoginStatus(context)
 
         if (ResidentStatus) {
-            context.startActivity(Intent(context, MainDashboardActivity::class.java))
+            context.startActivity(Intent(context, MainHomeActivity::class.java))
             context.finish()
         }
         else {

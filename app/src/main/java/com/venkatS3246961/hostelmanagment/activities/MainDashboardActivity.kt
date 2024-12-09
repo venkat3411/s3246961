@@ -19,6 +19,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -72,7 +75,7 @@ fun HostelPreview() {
 @Composable
 fun HostelSelection(onHostelSelected: (hostelData: HostelData) -> Unit,onProfileClicked: () -> Unit) {
     val hostels = getHostelData()
-    val context = LocalContext.current as Activity
+    val context = LocalContext.current
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -84,41 +87,24 @@ fun HostelSelection(onHostelSelected: (hostelData: HostelData) -> Unit,onProfile
                 .fillMaxWidth()
                 .background(color = colorResource(id = R.color.p1))
                 .padding(vertical = 6.dp, horizontal = 16.dp),
-             // Space between elements in the row
-
-            verticalAlignment = Alignment.CenterVertically
+            // Space between elements in the row
+            verticalAlignment = Alignment.CenterVertically, // Align vertically to center
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.hostel_icon),
-                contentDescription = "Hostel Icon",
-                modifier = Modifier
-                    .width(36.dp)
-                    .height(36.dp)
-
-            )
-
-            Spacer(modifier = Modifier.width(16.dp))
-
-            Text(
-                text = "Hostels",
-                style = MaterialTheme.typography.titleLarge,
-                color = colorResource(id = R.color.p2),
-                fontWeight = FontWeight.Bold
-            )
-            Spacer(modifier = Modifier.weight(1f))
-
-            Image(painter = painterResource(id = R.drawable.baseline_logout_24),
-                contentDescription = "Logout",
+            Image(painter = painterResource(id = R.drawable.baseline_arrow_back_24),
+                contentDescription = "Back",
                 modifier = Modifier
                     .clickable {
-                        // Navigate to LoginActivity when clicked
-                        ResidentDetails.saveResidentLoginStatus(context, false)
-
-                        val intent = Intent(context, SignInActivity::class.java)
-                        context.startActivity(intent)
-                         context.finish()
+                        (context as Activity).finish()
                     }
-                    .padding(start = 8.dp) // Optional spacing // Optional spacin
+                    .padding(start = 4.dp) // Optional spacing // Optional spacin
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+
+
+            Text(
+                text = "Hostel List",
+                style = MaterialTheme.typography.headlineSmall.copy(fontWeight = FontWeight.Bold),
+                color = colorResource(id = R.color.p2)
             )
         }
 
@@ -734,3 +720,5 @@ fun HostelBookingItem(hostelData: HostelData, onHostelSelected: (hostelData: Hos
         }
     }
 }
+
+

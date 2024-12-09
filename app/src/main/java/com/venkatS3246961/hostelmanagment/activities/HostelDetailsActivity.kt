@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -400,8 +401,8 @@ fun HostelDetails(hostel: HostelData) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.Black)
-                .padding(16.dp),
+                .background(color = colorResource(id = R.color.p1))
+                .padding(vertical = 6.dp, horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(painter = painterResource(id = R.drawable.baseline_arrow_back_24),
