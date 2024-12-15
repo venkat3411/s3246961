@@ -159,6 +159,9 @@ fun LoginScreen() {
 
             }
 
+            Spacer(modifier = Modifier.height(36.dp))
+
+
 
         }
     }
@@ -195,6 +198,7 @@ fun checkAndGO(
             Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
             ResidentDetails.saveResidentLoginStatus(context, true)
             ResidentDetails.saveResidentEmail(context, useremail)
+            ResidentDetails.saveResidentName(context,userData.username)
             context.startActivity(Intent(context, MainHomeActivity::class.java))
             context.finish()
         } else {

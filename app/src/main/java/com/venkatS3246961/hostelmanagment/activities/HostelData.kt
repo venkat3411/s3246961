@@ -1,6 +1,7 @@
 package com.venkatS3246961.hostelmanagment.activities
 
 data class HostelData(
+    val hostelId : Int = 0,
     val hostelname: String = "",
     val hostellocation: String = "",
     val hostelcontact: String = "",
@@ -54,5 +55,9 @@ data class HostelData(
     val hostelreviews: String = "",
     val totalrooms: Int=0,
     val availablerooms: Int=0,
+    var guestName : String = "",
+    var bookingWeeks : String = "",
+    var bookingCost : String = "",
+    var bookingDate : String = ""
 
 )

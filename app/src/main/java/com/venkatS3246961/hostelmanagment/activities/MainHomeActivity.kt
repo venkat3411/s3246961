@@ -243,14 +243,20 @@ fun HomeScreen() {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
+
                 .padding(horizontal = 12.dp, vertical = 6.dp),
+
             shape = RoundedCornerShape(8.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(16.dp)
+                    .clickable {
+                        val intent = Intent(context, HostelBookingScreenActivity::class.java)
+                        context.startActivity(intent)
+                    },
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {

@@ -1,6 +1,7 @@
 package com.venkatS3246961.hostelmanagment.activities
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,6 +45,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
 import com.venkatS3246961.hostelmanagment.R
 
 class HostelDetailsActivity : AppCompatActivity() {
@@ -522,6 +525,21 @@ fun HostelDetails(hostel: HostelData) {
             }
         }
 
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Button(
+            onClick = {
+                val intent = Intent(context, BookingActivity::class.java)
+                context.startActivity(intent)
+                // Add navigation or action for "Book Now" button here
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+        ) {
+            Text(text = "Book Now", style = MaterialTheme.typography.bodyMedium, color = Color.White)
+        }
+
         Text(
             text = "Key Features",
             style = MaterialTheme.typography.headlineSmall,
@@ -533,7 +551,9 @@ fun HostelDetails(hostel: HostelData) {
                 .padding(vertical = 16.dp)
         )
 
-        // Description
+
+
+
         Text(
             text = hostel.hosteldescription,
             style = MaterialTheme.typography.bodyMedium,

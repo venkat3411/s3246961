@@ -126,6 +126,7 @@ fun HostelSelection(onHostelSelected: (hostelData: HostelData) -> Unit,onProfile
 fun getHostelData(): List<HostelData> {
     return listOf(
         HostelData(
+            hostelId = 1,
             hostelname = "Cornell Quarter",
             hostellocation = "City Center, City A",
             hostelcontact = "123-111-2233",
@@ -185,13 +186,10 @@ fun getHostelData(): List<HostelData> {
                 FeaturesData(R.drawable.baseline_personal_injury_24, "Wardens", "live in student wardens"),
                 FeaturesData(R.drawable.baseline_newspaper_24, "Bills", "included"),
                 FeaturesData(R.drawable.baseline_tv_24, "Free TV", "in kitchen/diner"),
-
-
-
-
             )
         ),
         HostelData(
+            hostelId = 2,
             hostelname = "King Edward's Square",
             hostelimage1 = R.drawable.baseline_business_24,
             hostelimage2 = R.drawable.baseline_pentagon_24,
@@ -256,6 +254,7 @@ fun getHostelData(): List<HostelData> {
             )
         ),
         HostelData(
+            hostelId = 3,
             hostelname = "Woodlands Halls",
             hostelimage1 = R.drawable.baseline_business_24,
             hostelimage2 = R.drawable.baseline_pentagon_24,
@@ -322,6 +321,7 @@ fun getHostelData(): List<HostelData> {
             )
         ),
         HostelData(
+            hostelId = 4,
             hostelname = "West Parkside Village",
             hostelimage1 = R.drawable.baseline_business_24,
             hostelimage2 = R.drawable.baseline_pentagon_24,
@@ -390,6 +390,7 @@ fun getHostelData(): List<HostelData> {
 
         ),
         HostelData(
+            hostelId = 5,
             hostelname = "East Parkside Village",
             hostellocation = "City E",
             hostelcontact = "777-888-9999",
@@ -451,6 +452,7 @@ fun getHostelData(): List<HostelData> {
                 )
         ),
         HostelData(
+            hostelId = 6,
             hostelname = "Parkside Halls",
             hostelimage1 = R.drawable.baseline_business_24,
             hostelimage2 = R.drawable.baseline_pentagon_24,
