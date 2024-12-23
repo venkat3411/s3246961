@@ -1,4 +1,4 @@
-package com.venkatS3246961.hostelmanagment.activities
+package com.S3246961venkat.hostelmanagment.activities
 
 import android.app.Activity
 import android.content.Context
@@ -40,9 +40,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.google.firebase.database.FirebaseDatabase
-import com.venkatS3246961.hostelmanagment.R
-import com.venkatS3246961.hostelmanagment.ResidentDetails
-import com.venkatS3246961.hostelmanagment.activities.SelectHostel.hostel
+import com.S3246961venkat.hostelmanagment.R
+import com.S3246961venkat.hostelmanagment.ResidentDetails
+import com.S3246961venkat.hostelmanagment.activities.SelectHostel.hostel
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -250,12 +250,12 @@ fun BookingScreen(hostel: HostelData) {
 
 private fun saveHostel(hostel: HostelData, context: Context) {
 
-    val db = FirebaseDatabase.getInstance()
-    val ref = db.getReference("HostelSavings")
+    val firebaseDatabase = FirebaseDatabase.getInstance()
+    val databaseReference = firebaseDatabase.getReference("HostelSavings")
 
     val residentEmail = ResidentDetails.getResidentEmail(context)!!
 
-    ref.child(residentEmail.replace(".", ",")).child(hostel.hostelId.toString()).setValue(hostel)
+    databaseReference.child(residentEmail.replace(".", ",")).child(hostel.hostelId.toString()).setValue(hostel)
         .addOnCompleteListener { task ->
             if (task.isSuccessful) {
 

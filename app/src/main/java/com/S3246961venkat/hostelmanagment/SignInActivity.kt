@@ -1,4 +1,4 @@
-package com.venkatS3246961.hostelmanagment
+package com.S3246961venkat.hostelmanagment
 
 import android.app.Activity
 import android.content.Intent
@@ -35,8 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.firebase.database.FirebaseDatabase
-import com.venkatS3246961.hostelmanagment.activities.MainDashboardActivity
-import com.venkatS3246961.hostelmanagment.activities.MainHomeActivity
+import com.S3246961venkat.hostelmanagment.activities.MainHomeActivity
 
 
 class SignInActivity : ComponentActivity() {
@@ -46,14 +45,14 @@ class SignInActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            LoginScreen()
+            SignInScreen()
         }
     }
 }
 
 
 @Composable
-fun LoginScreen() {
+fun SignInScreen() {
     var useremail by remember { mutableStateOf("") }
     var userpassword by remember { mutableStateOf("") }
 
@@ -162,25 +161,23 @@ fun LoginScreen() {
             Spacer(modifier = Modifier.height(36.dp))
 
 
-
         }
     }
 
 }
 
 private fun signInGuest(useremail: String, userpassword: String, context: Activity) {
-    val db = FirebaseDatabase.getInstance()
-    val sanitizedUid = useremail.replace(".", ",")
-    val ref = db.getReference("Users").child(sanitizedUid)
+    val firebaseDatabase = FirebaseDatabase.getInstance()
+    val databaseReference = firebaseDatabase.getReference("Users").child(useremail.replace(".", ","))
 
-    ref.get().addOnCompleteListener { task ->
+    databaseReference.get().addOnCompleteListener { task ->
         if (task.isSuccessful) {
             val userData = task.result?.getValue(ResidentData::class.java)
             checkAndGO(useremail, userpassword, context, userData)
         } else {
             Toast.makeText(
                 context,
-                "Failed to retrieve user data: ${task.exception?.message}",
+                "Failed to Fetch Details",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -198,7 +195,7 @@ fun checkAndGO(
             Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
             ResidentDetails.saveResidentLoginStatus(context, true)
             ResidentDetails.saveResidentEmail(context, useremail)
-            ResidentDetails.saveResidentName(context,userData.username)
+            ResidentDetails.saveResidentName(context, userData.username)
             context.startActivity(Intent(context, MainHomeActivity::class.java))
             context.finish()
         } else {
@@ -212,6 +209,6 @@ fun checkAndGO(
 
 @Preview(showBackground = true)
 @Composable
-fun LoginScreenPreview() {
-    LoginScreen()
+fun SignInScreenPreview() {
+    SignInScreen()
 }

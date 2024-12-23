@@ -1,4 +1,4 @@
-package com.venkatS3246961.hostelmanagment.activities
+package com.S3246961venkat.hostelmanagment.activities
 
 import android.app.Activity
 import android.os.Bundle
@@ -40,9 +40,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.venkatS3246961.hostelmanagment.R
-import com.venkatS3246961.hostelmanagment.ResidentDetails
-import com.venkatS3246961.hostelmanagment.ui.theme.HostelManagmentTheme
+import com.S3246961venkat.hostelmanagment.R
+import com.S3246961venkat.hostelmanagment.ResidentDetails
+import com.S3246961venkat.hostelmanagment.ui.theme.HostelManagmentTheme
 
 class HostelBookingScreenActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,7 +102,6 @@ fun HostelBookingScreen(hostelData: HostelData) {
                 .padding(horizontal = 12.dp), // Add padding for better spacing
             verticalArrangement = Arrangement.spacedBy(4.dp) // Space out elements
         ) {
-            // Image filling max width and fixed height of 200dp
             Image(
                 painter = painterResource(id = R.drawable.h1_cornell), // Replace with your image resource
                 contentDescription = "Hostel Image",

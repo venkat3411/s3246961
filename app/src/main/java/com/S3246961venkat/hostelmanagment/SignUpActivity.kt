@@ -1,7 +1,6 @@
-package com.venkatS3246961.hostelmanagment
+package com.S3246961venkat.hostelmanagment
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -35,9 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.firebase.database.FirebaseDatabase
-import com.venkatS3246961.hostelmanagment.ui.theme.HostelManagmentTheme
-import java.text.SimpleDateFormat
-import java.util.Locale
+import com.S3246961venkat.hostelmanagment.ui.theme.HostelManagmentTheme
 
 class SignUpActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,14 +42,14 @@ class SignUpActivity : ComponentActivity() {
 
         setContent {
             HostelManagmentTheme {
-                RegisterScreen()
+                SignUpScreen()
             }
         }
     }
 }
 
 @Composable
-fun RegisterScreen() {
+fun SignUpScreen() {
     var name by remember { mutableStateOf("") }
     var useremail by remember { mutableStateOf("") }
     var userpassword by remember { mutableStateOf("") }
@@ -204,17 +201,17 @@ fun RegisterScreen() {
 }
 
 private fun signUpGuest(residentData: ResidentData, context: Activity) {
-    val db = FirebaseDatabase.getInstance()
-    val ref = db.getReference("Users")
+    val firebaseDatabase = FirebaseDatabase.getInstance()
+    val databaseReference = firebaseDatabase.getReference("Users")
 
-    ref.child(residentData.useremail.replace(".", ",")).setValue(residentData)
+    databaseReference.child(residentData.useremail.replace(".", ",")).setValue(residentData)
         .addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 checkandLogin(context)
             } else {
                 Toast.makeText(
                     context,
-                    "User Registration Failed: ${task.exception?.message}",
+                    "Account Creation UnSuccessfull",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -222,7 +219,7 @@ private fun signUpGuest(residentData: ResidentData, context: Activity) {
         .addOnFailureListener { exception ->
             Toast.makeText(
                 context,
-                "User Registration Failed: ${exception.message}",
+                "Failure",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -236,6 +233,6 @@ fun checkandLogin(context: Activity) {
 
 @Preview(showBackground = true)
 @Composable
-fun RegisterScreenPreview() {
-    RegisterScreen()
+fun SignUpScreenPreview() {
+    SignUpScreen()
 }

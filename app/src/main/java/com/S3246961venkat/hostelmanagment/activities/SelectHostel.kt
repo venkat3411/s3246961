@@ -1,4 +1,4 @@
-package com.venkatS3246961.hostelmanagment.activities
+package com.S3246961venkat.hostelmanagment.activities
 
 object SelectHostel {
     var hostel = HostelData()

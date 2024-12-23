@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:434446173606:android:af93f7e8cfad0f1ebebb67",
+        "mobilesdk_app_id": "1:434446173606:android:d7cec63e355a7793bebb67",
         "android_client_info": {
-          "package_name": "com.venkatS3246961.hostelmanagment"
+          "package_name": "com.S3246961venkat.hostelmanagment"
         }
       },
       "oauth_client": [],

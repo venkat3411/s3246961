@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.venkatS3246961.hostelmanagment"
+    namespace = "com.S3246961venkat.hostelmanagment"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.venkatS3246961.hostelmanagment"
+        applicationId = "com.S3246961venkat.hostelmanagment"
         minSdk = 24
         targetSdk = 35
         versionCode = 1

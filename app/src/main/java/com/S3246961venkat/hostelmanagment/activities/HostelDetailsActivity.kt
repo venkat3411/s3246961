@@ -1,4 +1,4 @@
-package com.venkatS3246961.hostelmanagment.activities
+package com.S3246961venkat.hostelmanagment.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -45,8 +45,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat.startActivity
-import com.venkatS3246961.hostelmanagment.R
+import com.S3246961venkat.hostelmanagment.R
 
 class HostelDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -396,11 +395,9 @@ fun HDetails() {
 @Composable
 fun HostelDetails(hostel: HostelData) {
     val context = LocalContext.current as Activity
-    //  val context = LocalContext.current
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        // Row with Back Arrow and Hostel Details Text
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -531,7 +528,6 @@ fun HostelDetails(hostel: HostelData) {
             onClick = {
                 val intent = Intent(context, BookingActivity::class.java)
                 context.startActivity(intent)
-                // Add navigation or action for "Book Now" button here
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -579,89 +575,6 @@ fun HostelDetails(hostel: HostelData) {
             }
         }
 
-        /*
-        // Rows of Images and Text
-        // Three rows of images with text
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-
-
-                .padding(4.dp),
-
-            horizontalArrangement = Arrangement.Absolute.SpaceEvenly
-        )
-        {
-            listOf(
-                Pair(hostel.hostelimage4, hostel.boldtext4 to hostel.normaltext4),
-                Pair(hostel.hostelimage5, hostel.boldtext5 to hostel.normaltext5),
-                Pair(hostel.hostelimage6, hostel.boldtext6 to hostel.normaltext6)
-            ).forEach { (image, textPair) ->
-                ImageWithBlackText(
-                    image = painterResource(id = image),
-                    boldText = textPair.first,
-                    normalText = textPair.second
-                )
-            }
-        }
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp),
-            horizontalArrangement = Arrangement.Absolute.SpaceEvenly
-        ) {
-            listOf(
-                Pair(hostel.hostelimage7, hostel.boldtext7 to hostel.normaltext7),
-                Pair(hostel.hostelimage8, hostel.boldtext8 to hostel.normaltext8),
-                Pair(hostel.hostelimage9, hostel.boldtext9 to hostel.normaltext9)
-            ).forEach { (image, textPair) ->
-                ImageWithBlackText(
-                    image = painterResource(id = image),
-                    boldText = textPair.first,
-                    normalText = textPair.second
-                )
-            }
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp),
-            horizontalArrangement = Arrangement.Absolute.SpaceEvenly
-        ) {
-            listOf(
-                Pair(hostel.hostelimage10, hostel.boldtext10 to hostel.normaltext10),
-                Pair(hostel.hostelimage11, hostel.boldtext11 to hostel.normaltext11),
-                Pair(hostel.hostelimage12, hostel.boldtext12 to hostel.normaltext12)
-            ).forEach { (image, textPair) ->
-                ImageWithBlackText(
-                    image = painterResource(id = image),
-                    boldText = textPair.first,
-                    normalText = textPair.second
-                )
-            }
-        }
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp),
-            horizontalArrangement = Arrangement.Absolute.SpaceEvenly
-        ) {
-            listOf(
-                Pair(hostel.hostelimage13, hostel.boldtext13 to hostel.normaltext13),
-
-
-            ).forEach { (image, textPair) ->
-                ImageWithBlackText(
-                    image = painterResource(id = image),
-                    boldText = textPair.first,
-                    normalText = textPair.second
-                )
-            }
-        }
-
-        */
     }
 }
 
@@ -669,7 +582,6 @@ fun HostelDetails(hostel: HostelData) {
 @Composable
 fun ImageWithWhiteText(image: Painter, boldText: String, normalText: String) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        // Display the image
         Image(
             painter = image,
             contentDescription = null, // Optional, no description needed
@@ -731,8 +643,7 @@ fun ImageWithBlackText(imageRes: Int, boldText: String, normalText: String) {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
-    //  HDetails()
+fun HostelDetailsPreview() {
     HostelDetails(SelectHostel.hostel)
 }
 

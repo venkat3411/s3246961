@@ -1,4 +1,4 @@
-package com.venkatS3246961.hostelmanagment
+package com.S3246961venkat.hostelmanagment
 
 import android.app.Activity
 import android.content.Intent
@@ -31,9 +31,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.venkatS3246961.hostelmanagment.activities.MainDashboardActivity
-import com.venkatS3246961.hostelmanagment.activities.MainHomeActivity
-import com.venkatS3246961.hostelmanagment.ui.theme.HostelManagmentTheme
+import com.S3246961venkat.hostelmanagment.activities.MainHomeActivity
+import com.S3246961venkat.hostelmanagment.ui.theme.HostelManagmentTheme
 import kotlinx.coroutines.delay
 
 
@@ -43,7 +42,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             HostelManagmentTheme {
-                MainScreen(onLoginClick = { value ->})
+                MainScreen()
             }
             }
     }
@@ -52,7 +51,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreen(onLoginClick: (value: Int) -> Unit) {
+fun MainScreen() {
     var showSplash by remember { mutableStateOf(true) }
 
     val context = LocalContext.current as Activity

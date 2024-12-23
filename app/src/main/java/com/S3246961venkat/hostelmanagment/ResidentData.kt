@@ -1,4 +1,4 @@
-package com.venkatS3246961.hostelmanagment
+package com.S3246961venkat.hostelmanagment
 
 data class ResidentData(
     val username: String = "",

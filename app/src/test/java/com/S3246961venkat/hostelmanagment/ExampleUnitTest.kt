@@ -1,4 +1,4 @@
-package com.venkatS3246961.hostelmanagment
+package com.S3246961venkat.hostelmanagment
 
 import org.junit.Test
 
