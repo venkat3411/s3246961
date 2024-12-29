@@ -13,6 +13,12 @@
         android:theme="@style/Theme.HostelManagment"
         tools:targetApi="31">
         <activity
+            android:name=".activities.ContactusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ViewMapActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.HostelBookingScreenActivity"
             android:exported="false" />
         <activity
@@ -50,6 +56,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBbjh-tqqnt6bChHRv8ZI9wY0R9w5Z_MSI" />
     </application>
 
 </manifest>

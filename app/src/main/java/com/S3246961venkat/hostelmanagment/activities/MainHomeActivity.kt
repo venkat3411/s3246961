@@ -138,42 +138,49 @@ fun HomeScreen() {
             }
         }
 
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 6.dp),
-            shape = RoundedCornerShape(8.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-        ) {
-            Row(
+        if(false) {
+            Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                    .padding(horizontal = 12.dp, vertical = 6.dp),
+                shape = RoundedCornerShape(8.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_complaint),
-                    contentDescription = "Submit",
-                    modifier = Modifier.size(36.dp)
-                )
-                Text(
-                    text = "Submit Grevience",
-                    color = Color.Black,
-                    fontSize = 24.sp,
-                    style = MaterialTheme.typography.bodySmall
-                )
-                Icon(
-                    imageVector = Icons.Default.ArrowForward,
-                    contentDescription = "Arrow Forward"
-                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_complaint),
+                        contentDescription = "Submit",
+                        modifier = Modifier.size(36.dp)
+                    )
+                    Text(
+                        text = "Submit Grevience",
+                        color = Color.Black,
+                        fontSize = 24.sp,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                    Icon(
+                        imageVector = Icons.Default.ArrowForward,
+                        contentDescription = "Arrow Forward"
+                    )
+                }
             }
+
         }
 
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 6.dp),
+                .padding(horizontal = 12.dp, vertical = 6.dp)
+                .clickable {
+                    val intent = Intent(context, ContactusActivity::class.java)
+                    context.startActivity(intent)
+                },
             shape = RoundedCornerShape(8.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
@@ -205,7 +212,11 @@ fun HomeScreen() {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 6.dp),
+                .padding(horizontal = 12.dp, vertical = 6.dp)
+                .clickable {
+                    val intent = Intent(context, ViewMapActivity::class.java)
+                    context.startActivity(intent)
+                },
             shape = RoundedCornerShape(8.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
         ) {
