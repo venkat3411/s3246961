@@ -59,7 +59,7 @@ class BookingActivity : AppCompatActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookingScreen(hostel: HostelData) {
-    val context = LocalContext.current as BookingActivity
+    val appContext = LocalContext.current as BookingActivity
 
     var weeks by remember { mutableStateOf("") }
     var totalCost by remember { mutableStateOf("") }
@@ -84,7 +84,7 @@ fun BookingScreen(hostel: HostelData) {
                 contentDescription = "Back",
                 modifier = Modifier
                     .clickable {
-                        context.finish()
+                        appContext.finish()
 
 
                     }
@@ -141,7 +141,7 @@ fun BookingScreen(hostel: HostelData) {
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = ResidentDetails.getResidentName(context)!!,
+                text = ResidentDetails.getResidentName(appContext)!!,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurface
             )
@@ -220,22 +220,22 @@ fun BookingScreen(hostel: HostelData) {
             onClick = {
 
                 if (weeks.isBlank()) {
-                    Toast.makeText(context, "Enter No Of Weeks", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(appContext, "Enter No Of Weeks", Toast.LENGTH_SHORT).show()
                 } else {
                     val current = LocalDateTime.now()
                     val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
                     val dateFormatted = current.format(formatter)
 
-                    hostel.guestName = ResidentDetails.getResidentName(context)!!
+                    hostel.guestName = ResidentDetails.getResidentName(appContext)!!
                     hostel.bookingWeeks = weeks
                     hostel.bookingCost = (weeks.toInt() * hostel.hostelprice).toString()
                     hostel.bookingDate=dateFormatted
 
-                    saveHostel(hostel, context)
+                    saveHostel(hostel, appContext)
                 }
 
-                // Use the captured context inside onClick
-                Toast.makeText(context, "Booking Successful", Toast.LENGTH_SHORT).show()
+                // Use the captured appContext inside onClick
+                Toast.makeText(appContext, "Booking Successful", Toast.LENGTH_SHORT).show()
             },
             modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
             shape = RoundedCornerShape(8.dp),
@@ -248,31 +248,31 @@ fun BookingScreen(hostel: HostelData) {
 }
 
 
-private fun saveHostel(hostel: HostelData, context: Context) {
+private fun saveHostel(hostel: HostelData, appContext: Context) {
 
     val firebaseDatabase = FirebaseDatabase.getInstance()
     val databaseReference = firebaseDatabase.getReference("HostelSavings")
 
-    val residentEmail = ResidentDetails.getResidentEmail(context)!!
+    val residentEmail = ResidentDetails.getResidentEmail(appContext)!!
 
     databaseReference.child(residentEmail.replace(".", ",")).child(hostel.hostelId.toString()).setValue(hostel)
         .addOnCompleteListener { task ->
             if (task.isSuccessful) {
 
-                (context as Activity).finish()
-                Toast.makeText(context, "HostelReserved Successfully", Toast.LENGTH_SHORT).show()
+                (appContext as Activity).finish()
+                Toast.makeText(appContext, "Hostel Reserved Successfully", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(
-                    context,
-                    "Hostel Booking Failed: ${task.exception?.message}",
+                    appContext,
+                    "Hostel Booking Failed",
                     Toast.LENGTH_SHORT
                 ).show()
             }
         }
         .addOnFailureListener { exception ->
             Toast.makeText(
-                context,
-                "Booking Failed: ${exception.message}",
+                appContext,
+                "Something went wrong while booking your hostel",
                 Toast.LENGTH_SHORT
             ).show()
         }

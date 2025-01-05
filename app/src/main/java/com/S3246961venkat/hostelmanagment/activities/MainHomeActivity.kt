@@ -53,7 +53,7 @@ class MainHomeActivity : ComponentActivity() {
 @Composable
 fun HomeScreen() {
 
-    val context = LocalContext.current
+    val appContext = LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -87,18 +87,18 @@ fun HomeScreen() {
             )
             Spacer(modifier = Modifier.weight(1f))
 
-            Image(painter = painterResource(id = R.drawable.baseline_logout_24),
-                contentDescription = "Logout",
-                modifier = Modifier
-                    .clickable {
-                        ResidentDetails.saveResidentLoginStatus(context, false)
-
-                        val intent = Intent(context, SignInActivity::class.java)
-                        context.startActivity(intent)
-                        (context as Activity).finish()
-                    }
-                    .padding(start = 8.dp)
-            )
+//            Image(painter = painterResource(id = R.drawable.baseline_logout_24),
+//                contentDescription = "Logout",
+//                modifier = Modifier
+//                    .clickable {
+//                        ResidentDetails.saveResidentLoginStatus(appContext, false)
+//
+//                        val intent = Intent(appContext, SignInActivity::class.java)
+//                        appContext.startActivity(intent)
+//                        (appContext as Activity).finish()
+//                    }
+//                    .padding(start = 8.dp)
+//            )
         }
 
         Card(
@@ -106,8 +106,8 @@ fun HomeScreen() {
                 .fillMaxWidth()
                 .padding(horizontal = 12.dp, vertical = 6.dp)
                 .clickable {
-                    val intent = Intent(context, MainDashboardActivity::class.java)
-                    context.startActivity(intent)
+                    val intent = Intent(appContext, MainDashboardActivity::class.java)
+                    appContext.startActivity(intent)
                 },
             shape = RoundedCornerShape(8.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -115,8 +115,7 @@ fun HomeScreen() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
-                ,
+                    .padding(16.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -138,7 +137,7 @@ fun HomeScreen() {
             }
         }
 
-        if(false) {
+        if (false) {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -178,8 +177,8 @@ fun HomeScreen() {
                 .fillMaxWidth()
                 .padding(horizontal = 12.dp, vertical = 6.dp)
                 .clickable {
-                    val intent = Intent(context, ContactusActivity::class.java)
-                    context.startActivity(intent)
+                    val intent = Intent(appContext, ContactusActivity::class.java)
+                    appContext.startActivity(intent)
                 },
             shape = RoundedCornerShape(8.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -214,8 +213,8 @@ fun HomeScreen() {
                 .fillMaxWidth()
                 .padding(horizontal = 12.dp, vertical = 6.dp)
                 .clickable {
-                    val intent = Intent(context, ViewMapActivity::class.java)
-                    context.startActivity(intent)
+                    val intent = Intent(appContext, ViewMapActivity::class.java)
+                    appContext.startActivity(intent)
                 },
             shape = RoundedCornerShape(8.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
@@ -259,8 +258,8 @@ fun HomeScreen() {
                     .fillMaxWidth()
                     .padding(16.dp)
                     .clickable {
-                        val intent = Intent(context, HostelBookingScreenActivity::class.java)
-                        context.startActivity(intent)
+                        val intent = Intent(appContext, HostelBookingScreenActivity::class.java)
+                        appContext.startActivity(intent)
                     },
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
@@ -272,6 +271,47 @@ fun HomeScreen() {
                 )
                 Text(
                     text = "My Bookings",
+                    color = Color.Black,
+                    fontSize = 24.sp,
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Icon(
+                    imageVector = Icons.Default.ArrowForward,
+                    contentDescription = "Arrow Forward"
+                )
+            }
+        }
+
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+
+                .padding(horizontal = 12.dp, vertical = 6.dp),
+
+            shape = RoundedCornerShape(8.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    .clickable {
+                        ResidentDetails.saveResidentLoginStatus(appContext, false)
+
+                        val intent = Intent(appContext, SignInActivity::class.java)
+                        appContext.startActivity(intent)
+                        (appContext as Activity).finish()
+                    },
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.baseline_logout_24),
+                    contentDescription = "Logout",
+                    modifier = Modifier.size(36.dp)
+                )
+                Text(
+                    text = "Logout",
                     color = Color.Black,
                     fontSize = 24.sp,
                     style = MaterialTheme.typography.bodySmall

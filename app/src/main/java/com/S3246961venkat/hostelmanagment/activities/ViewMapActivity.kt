@@ -61,7 +61,7 @@ fun HostelLocations() {
             CameraPosition.fromLatLngZoom(cornellQuarterLocation, 14f) // Focused on Cornell Quarter
     }
 
-    val context = LocalContext.current as Activity
+    val appContext = LocalContext.current as Activity
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -76,7 +76,7 @@ fun HostelLocations() {
                 contentDescription = "Back",
                 modifier = Modifier
                     .clickable {
-                        context.finish()
+                        appContext.finish()
 
 
                     }
@@ -102,7 +102,7 @@ fun HostelLocations() {
                 title = "Cornell Quarter",
                 onClick = {
                     SelectHostel.hostel = getHostelData()[0]
-                    context.startActivity(Intent(context, HostelDetailsActivity::class.java))
+                    appContext.startActivity(Intent(appContext, HostelDetailsActivity::class.java))
                     false
                 }
             )
@@ -112,7 +112,7 @@ fun HostelLocations() {
                 title = "King Edward's Square",
                 onClick = {
                     SelectHostel.hostel = getHostelData()[1]
-                    context.startActivity(Intent(context, HostelDetailsActivity::class.java))
+                    appContext.startActivity(Intent(appContext, HostelDetailsActivity::class.java))
                     false
                 }
             )
@@ -122,7 +122,7 @@ fun HostelLocations() {
                 title = "Woodlands Halls",
                 onClick = {
                     SelectHostel.hostel = getHostelData()[2]
-                    context.startActivity(Intent(context, HostelDetailsActivity::class.java))
+                    appContext.startActivity(Intent(appContext, HostelDetailsActivity::class.java))
                     false
                 }
             )
@@ -132,7 +132,7 @@ fun HostelLocations() {
                 title = "West ParkSide Village",
                 onClick = {
                     SelectHostel.hostel = getHostelData()[3]
-                    context.startActivity(Intent(context, HostelDetailsActivity::class.java))
+                    appContext.startActivity(Intent(appContext, HostelDetailsActivity::class.java))
                     false
                 }
             )
@@ -142,7 +142,7 @@ fun HostelLocations() {
                 title = "East ParkSide Village",
                 onClick = {
                     SelectHostel.hostel = getHostelData()[4]
-                    context.startActivity(Intent(context, HostelDetailsActivity::class.java))
+                    appContext.startActivity(Intent(appContext, HostelDetailsActivity::class.java))
                     false
                 }
             )
@@ -152,7 +152,7 @@ fun HostelLocations() {
                 title = "ParkSide Halls",
                 onClick = {
                     SelectHostel.hostel = getHostelData()[5]
-                    context.startActivity(Intent(context, HostelDetailsActivity::class.java))
+                    appContext.startActivity(Intent(appContext, HostelDetailsActivity::class.java))
                     false
                 }
             )

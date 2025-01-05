@@ -52,26 +52,26 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen() {
-    var showSplash by remember { mutableStateOf(true) }
+    var shouldShowSplash by remember { mutableStateOf(true) }
 
-    val context = LocalContext.current as Activity
+    val appContext = LocalContext.current as Activity
 
     LaunchedEffect(Unit) {
         delay(3000) // 3 seconds delay
-        showSplash = false
+        shouldShowSplash = false
     }
-    if (showSplash) {
+    if (shouldShowSplash) {
         SplashScreen()
     } else {
-        val ResidentStatus = ResidentDetails.getResidentLoginStatus(context)
+        val ResidentStatus = ResidentDetails.getResidentLoginStatus(appContext)
 
         if (ResidentStatus) {
-            context.startActivity(Intent(context, MainHomeActivity::class.java))
-            context.finish()
+            appContext.startActivity(Intent(appContext, MainHomeActivity::class.java))
+            appContext.finish()
         }
         else {
-            context.startActivity(Intent(context, SignInActivity::class.java))
-            context.finish()
+            appContext.startActivity(Intent(appContext, SignInActivity::class.java))
+            appContext.finish()
         }
     }
 }
@@ -81,7 +81,7 @@ fun MainScreen() {
 
 @Composable
 fun SplashScreen() {
-    val context = LocalContext.current
+    val appContext = LocalContext.current
     Box(
         modifier = Modifier
             .fillMaxSize()

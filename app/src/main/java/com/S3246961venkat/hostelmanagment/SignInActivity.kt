@@ -53,10 +53,10 @@ class SignInActivity : ComponentActivity() {
 
 @Composable
 fun SignInScreen() {
-    var useremail by remember { mutableStateOf("") }
-    var userpassword by remember { mutableStateOf("") }
+    var residentEmail  by remember { mutableStateOf("") }
+    var residentCode by remember { mutableStateOf("") }
 
-    val context = LocalContext.current as Activity
+    val appContext = LocalContext.current as Activity
 
     Column(
         modifier = Modifier
@@ -87,8 +87,8 @@ fun SignInScreen() {
 
             TextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = useremail,
-                onValueChange = { useremail = it },
+                value = residentEmail,
+                onValueChange = { residentEmail = it },
                 label = { Text("Enter E-Mail") },
             )
 
@@ -96,8 +96,8 @@ fun SignInScreen() {
 
             TextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = userpassword,
-                onValueChange = { userpassword = it },
+                value = residentCode,
+                onValueChange = { residentCode = it },
                 label = { Text("Enter Password") },
             )
 
@@ -106,17 +106,17 @@ fun SignInScreen() {
             Button(
                 onClick = {
                     when {
-                        useremail.isEmpty() -> {
-                            Toast.makeText(context, " Please Enter Mail", Toast.LENGTH_SHORT).show()
+                        residentEmail.isEmpty() -> {
+                            Toast.makeText(appContext, "Resident Email is required", Toast.LENGTH_SHORT).show()
                         }
 
-                        userpassword.isEmpty() -> {
-                            Toast.makeText(context, " Please Enter Password", Toast.LENGTH_SHORT)
+                        residentCode.isEmpty() -> {
+                            Toast.makeText(appContext, "Resident Password is required", Toast.LENGTH_SHORT)
                                 .show()
                         }
 
                         else -> {
-                            signInGuest(useremail, userpassword, context)
+                            signInGuest(residentEmail, residentCode, appContext)
                         }
 
                     }
@@ -151,8 +151,8 @@ fun SignInScreen() {
                     color = colorResource(id = R.color.p2),
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Black),
                     modifier = Modifier.clickable {
-                        context.startActivity(Intent(context, SignUpActivity::class.java))
-                        context.finish()
+                        appContext.startActivity(Intent(appContext, SignUpActivity::class.java))
+                        appContext.finish()
                     }
                 )
 
@@ -166,17 +166,17 @@ fun SignInScreen() {
 
 }
 
-private fun signInGuest(useremail: String, userpassword: String, context: Activity) {
+private fun signInGuest(useremail: String, userpassword: String, appContext: Activity) {
     val firebaseDatabase = FirebaseDatabase.getInstance()
     val databaseReference = firebaseDatabase.getReference("Users").child(useremail.replace(".", ","))
 
     databaseReference.get().addOnCompleteListener { task ->
         if (task.isSuccessful) {
             val userData = task.result?.getValue(ResidentData::class.java)
-            checkAndGO(useremail, userpassword, context, userData)
+            checkAndGO(useremail, userpassword, appContext, userData)
         } else {
             Toast.makeText(
-                context,
+                appContext,
                 "Failed to Fetch Details",
                 Toast.LENGTH_SHORT
             ).show()
@@ -187,22 +187,22 @@ private fun signInGuest(useremail: String, userpassword: String, context: Activi
 fun checkAndGO(
     useremail: String,
     userpassword: String,
-    context: Activity,
+    appContext: Activity,
     userData: ResidentData?
 ) {
     if (userData != null) {
         if (userData.userpassword == userpassword) {
-            Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
-            ResidentDetails.saveResidentLoginStatus(context, true)
-            ResidentDetails.saveResidentEmail(context, useremail)
-            ResidentDetails.saveResidentName(context, userData.username)
-            context.startActivity(Intent(context, MainHomeActivity::class.java))
-            context.finish()
+            Toast.makeText(appContext, "Login successful", Toast.LENGTH_SHORT).show()
+            ResidentDetails.saveResidentLoginStatus(appContext, true)
+            ResidentDetails.saveResidentEmail(appContext, useremail)
+            ResidentDetails.saveResidentName(appContext, userData.username)
+            appContext.startActivity(Intent(appContext, MainHomeActivity::class.java))
+            appContext.finish()
         } else {
-            Toast.makeText(context, "Invalid Password", Toast.LENGTH_SHORT).show()
+            Toast.makeText(appContext, "Invalid Password", Toast.LENGTH_SHORT).show()
         }
     } else {
-        Toast.makeText(context, "No user data found", Toast.LENGTH_SHORT).show()
+        Toast.makeText(appContext, "No user data found", Toast.LENGTH_SHORT).show()
     }
 }
 

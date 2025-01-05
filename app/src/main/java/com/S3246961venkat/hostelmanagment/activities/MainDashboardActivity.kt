@@ -68,7 +68,7 @@ fun HostelSelection(
     onProfileClicked: () -> Unit
 ) {
     val hostels = getHostelData()
-    val context = LocalContext.current
+    val appContext = LocalContext.current
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -87,7 +87,7 @@ fun HostelSelection(
                 contentDescription = "Back",
                 modifier = Modifier
                     .clickable {
-                        (context as Activity).finish()
+                        (appContext as Activity).finish()
                     }
                     .padding(start = 4.dp) // Optional spacing // Optional spacin
             )

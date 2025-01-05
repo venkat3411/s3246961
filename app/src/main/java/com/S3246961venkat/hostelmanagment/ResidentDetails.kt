@@ -6,36 +6,36 @@ object ResidentDetails {
 
     private const val PREF_Resident = "HostelManagementData"
 
-    fun saveResidentLoginStatus(context: Context, value: Boolean) {
-        val residentLogin = context.getSharedPreferences(PREF_Resident, Context.MODE_PRIVATE)
+    fun saveResidentLoginStatus(appContext: Context, value: Boolean) {
+        val residentLogin = appContext.getSharedPreferences(PREF_Resident, Context.MODE_PRIVATE)
         val residentEditor = residentLogin.edit()
-        residentEditor.putBoolean("RESIDENT_STATUS", value).apply()
+        residentEditor.putBoolean("RESIDENT_LOGINS", value).apply()
     }
 
-    fun getResidentLoginStatus(context: Context): Boolean {
-        val residentLogin = context.getSharedPreferences(PREF_Resident, Context.MODE_PRIVATE)
-        return residentLogin.getBoolean("RESIDENT_STATUS", false)
+    fun getResidentLoginStatus(appContext: Context): Boolean {
+        val residentLogin = appContext.getSharedPreferences(PREF_Resident, Context.MODE_PRIVATE)
+        return residentLogin.getBoolean("RESIDENT_LOGINS", false)
     }
 
-    fun saveResidentName(context: Context, name: String) {
-        val residentName = context.getSharedPreferences(PREF_Resident, Context.MODE_PRIVATE)
+    fun saveResidentName(appContext: Context, name: String) {
+        val residentName = appContext.getSharedPreferences(PREF_Resident, Context.MODE_PRIVATE)
         val nameEditor = residentName.edit()
-        nameEditor.putString("RESIDENT_NAME", name).apply()
+        nameEditor.putString("RESIDENT_LOGINN", name).apply()
     }
 
-    fun getResidentName(context: Context): String? {
-        val residentName = context.getSharedPreferences(PREF_Resident, Context.MODE_PRIVATE)
-        return residentName.getString("RESIDENT_NAME", null)
+    fun getResidentName(appContext: Context): String? {
+        val residentName = appContext.getSharedPreferences(PREF_Resident, Context.MODE_PRIVATE)
+        return residentName.getString("RESIDENT_LOGINN", null)
     }
 
-    fun saveResidentEmail(context: Context, email: String) {
-        val residentEmail = context.getSharedPreferences(PREF_Resident, Context.MODE_PRIVATE)
+    fun saveResidentEmail(appContext: Context, email: String) {
+        val residentEmail = appContext.getSharedPreferences(PREF_Resident, Context.MODE_PRIVATE)
         val emailEditor = residentEmail.edit()
-        emailEditor.putString("RESIDENT_EMAIL", email).apply()
+        emailEditor.putString("RESIDENT_LOGINE", email).apply()
     }
 
-    fun getResidentEmail(context: Context): String? {
-        val residentEmail = context.getSharedPreferences(PREF_Resident, Context.MODE_PRIVATE)
-        return residentEmail.getString("RESIDENT_EMAIL", null)
+    fun getResidentEmail(appContext: Context): String? {
+        val residentEmail = appContext.getSharedPreferences(PREF_Resident, Context.MODE_PRIVATE)
+        return residentEmail.getString("RESIDENT_LOGINE", null)
     }
 }

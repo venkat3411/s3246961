@@ -46,7 +46,7 @@ class ContactusActivity : ComponentActivity() {
 @Composable
 fun ContactUsScreen()
 {
-    val context = LocalContext.current as Activity
+    val appContext = LocalContext.current as Activity
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -62,7 +62,7 @@ fun ContactUsScreen()
                 contentDescription = "Back",
                 modifier = Modifier
                     .clickable {
-                        context.finish()
+                        appContext.finish()
                     }
                     .padding(start = 4.dp)
             )
@@ -104,6 +104,14 @@ fun ContactUsScreen()
             color = Color.Blue,
             textAlign = TextAlign.Center
         )
-
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 12.dp),
+            text = "9699388423",
+            style = MaterialTheme.typography.labelLarge,
+            color = Color.Blue,
+            textAlign = TextAlign.Center
+        )
     }
 }

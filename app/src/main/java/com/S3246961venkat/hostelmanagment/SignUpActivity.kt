@@ -50,12 +50,12 @@ class SignUpActivity : ComponentActivity() {
 
 @Composable
 fun SignUpScreen() {
-    var name by remember { mutableStateOf("") }
-    var useremail by remember { mutableStateOf("") }
-    var userpassword by remember { mutableStateOf("") }
-    var confirmuserpassword by remember { mutableStateOf("") }
+    var residentName by remember { mutableStateOf("") }
+    var residentMail by remember { mutableStateOf("") }
+    var residentCode by remember { mutableStateOf("") }
+    var confirmResidentPassword by remember { mutableStateOf("") }
 
-    val context = LocalContext.current as Activity
+    val appContext = LocalContext.current as Activity
 
     Column(
         modifier = Modifier
@@ -88,8 +88,8 @@ fun SignUpScreen() {
 
             TextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = useremail,
-                onValueChange = { useremail = it },
+                value = residentMail,
+                onValueChange = { residentMail = it },
                 label = { Text("Enter Mail") },
 
                 )
@@ -98,8 +98,8 @@ fun SignUpScreen() {
 
             TextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = name,
-                onValueChange = { name = it },
+                value = residentName,
+                onValueChange = { residentName = it },
                 label = { Text("Enter Name") }
             )
 
@@ -108,8 +108,8 @@ fun SignUpScreen() {
 
             TextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = userpassword,
-                onValueChange = { userpassword = it },
+                value = residentCode,
+                onValueChange = { residentCode = it },
                 label = { Text("Enter Password") }
             )
 
@@ -118,8 +118,8 @@ fun SignUpScreen() {
 
             TextField(
                 modifier = Modifier.fillMaxWidth(),
-                value = confirmuserpassword,
-                onValueChange = { confirmuserpassword = it },
+                value = confirmResidentPassword,
+                onValueChange = { confirmResidentPassword = it },
                 label = { Text("Confirm Password") }
             )
 
@@ -128,33 +128,33 @@ fun SignUpScreen() {
             Button(
                 onClick = {
 
-                    if (name.isEmpty()) {
-                        Toast.makeText(context, "Enter name", Toast.LENGTH_SHORT).show()
+                    if (residentName.isEmpty()) {
+                        Toast.makeText(appContext, "Resident name is required", Toast.LENGTH_SHORT).show()
                         return@Button
                     }
 
-                    if (useremail.isEmpty()) {
-                        Toast.makeText(context, "Enter Mail", Toast.LENGTH_SHORT).show()
+                    if (residentMail.isEmpty()) {
+                        Toast.makeText(appContext, "Resident Email is required", Toast.LENGTH_SHORT).show()
                         return@Button
                     }
 
-                    if (userpassword.isEmpty()) {
-                        Toast.makeText(context, "Enter Password", Toast.LENGTH_SHORT).show()
+                    if (residentCode.isEmpty()) {
+                        Toast.makeText(appContext, "Resident Password is required", Toast.LENGTH_SHORT).show()
                         return@Button
                     }
 
-                    if (userpassword != confirmuserpassword) {
-                        Toast.makeText(context, "Passwords doesn't match", Toast.LENGTH_SHORT)
+                    if (residentCode != confirmResidentPassword) {
+                        Toast.makeText(appContext, "Seems passwords are different", Toast.LENGTH_SHORT)
                             .show()
                         return@Button
                     } else {
 
                         val residentData = ResidentData(
-                            username = name,
-                            useremail = useremail,
-                            userpassword = userpassword
+                            username = residentName,
+                            useremail = residentMail,
+                            userpassword = residentCode
                         )
-                        signUpGuest(residentData, context)
+                        signUpGuest(residentData, appContext)
                     }
 
 
@@ -189,8 +189,8 @@ fun SignUpScreen() {
                     color = colorResource(id = R.color.p2),
                     style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Black),
                     modifier = Modifier.clickable {
-                        context.startActivity(Intent(context, SignUpActivity::class.java))
-                        context.finish()
+                        appContext.startActivity(Intent(appContext, SignInActivity::class.java))
+                        appContext.finish()
                     }
                 )
             }
@@ -200,35 +200,35 @@ fun SignUpScreen() {
     }
 }
 
-private fun signUpGuest(residentData: ResidentData, context: Activity) {
+private fun signUpGuest(residentData: ResidentData, appContext: Activity) {
     val firebaseDatabase = FirebaseDatabase.getInstance()
     val databaseReference = firebaseDatabase.getReference("Users")
 
     databaseReference.child(residentData.useremail.replace(".", ",")).setValue(residentData)
         .addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                checkandLogin(context)
+                checkandLogin(appContext)
             } else {
                 Toast.makeText(
-                    context,
+                    appContext,
                     "Account Creation UnSuccessfull",
                     Toast.LENGTH_SHORT
                 ).show()
             }
         }
-        .addOnFailureListener { exception ->
+        .addOnFailureListener { _ ->
             Toast.makeText(
-                context,
+                appContext,
                 "Failure",
                 Toast.LENGTH_SHORT
             ).show()
         }
 }
 
-fun checkandLogin(context: Activity) {
-    Toast.makeText(context, "Registration Successful", Toast.LENGTH_SHORT).show()
-    context.startActivity(Intent(context, SignInActivity::class.java))
-    context.finish()
+fun checkandLogin(appContext: Activity) {
+    Toast.makeText(appContext, "Registration Successful", Toast.LENGTH_SHORT).show()
+    appContext.startActivity(Intent(appContext, SignInActivity::class.java))
+    appContext.finish()
 }
 
 @Preview(showBackground = true)

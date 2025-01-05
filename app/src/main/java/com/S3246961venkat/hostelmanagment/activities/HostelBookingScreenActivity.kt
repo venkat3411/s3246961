@@ -149,9 +149,9 @@ fun HostelBookingScreen(hostelData: HostelData) {
 
 @Composable
 fun HostelBookingSelection() {
-    val context = LocalContext.current
+    val appContext = LocalContext.current
 
-    val residentEmail = ResidentDetails.getResidentEmail(context)!!
+    val residentEmail = ResidentDetails.getResidentEmail(appContext)!!
 
     var hostels by remember { mutableStateOf(listOf<HostelData>()) }
 
@@ -179,7 +179,7 @@ fun HostelBookingSelection() {
                 contentDescription = "Back",
                 modifier = Modifier
                     .clickable {
-                        (context as Activity).finish()
+                        (appContext as Activity).finish()
                     }
                     .padding(start = 4.dp) // Optional spacing // Optional spacin
             )
